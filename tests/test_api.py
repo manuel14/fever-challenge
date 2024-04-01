@@ -3,7 +3,7 @@ import requests
 import unittest
 from unittest.mock import patch
 
-from events_api import app
+from api.events_api import app
 from tests.mocked_responses import MOCKED_RESPONSE
 
 
@@ -12,7 +12,7 @@ API_URL = "https://provider.code-challenge.feverup.com/api/events"
 
 class TestApp(unittest.TestCase):
 
-    @patch('events_api.requests.get')
+    @patch('api.events_api.requests.get')
     def test_external_api_down(self, mock_get):
         # testing that cached is used if available when external api is down
         mock_get.side_effect = requests.exceptions.HTTPError
@@ -22,7 +22,7 @@ class TestApp(unittest.TestCase):
 
     def test_cached_response_used(self):
         client = app.test_client()
-        with patch('events_api.requests.get') as mock_get:
+        with patch('api.events_api.requests.get') as mock_get:
             mock_get.return_value.status_code = 200
             mock_get.return_value.content = MOCKED_RESPONSE
             response1 = client.get(
@@ -37,7 +37,7 @@ class TestApp(unittest.TestCase):
 
     def test_no_results_for_params(self):
         client = app.test_client()
-        with patch('events_api.requests.get') as mock_get:
+        with patch('api.events_api.requests.get') as mock_get:
             mock_get.return_value.status_code = 200
             mock_get.return_value.content = MOCKED_RESPONSE
             response = client.get(

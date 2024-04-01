@@ -1,5 +1,5 @@
 run:
-	python3 -m venv env && source env/bin/activate && pip install -r requirements.txt && flask --app events_api run
+	python3 -m venv env && source env/bin/activate && pip install -r requirements.txt && flask --app api.events_api run
 
 install:
 	python3 -m venv env && source env/bin/activate && pip install -r requirements.txt
