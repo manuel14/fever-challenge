@@ -3,7 +3,7 @@
 - To run the api server execute: make run
 - To execute the tests: make test
 
-Both commands are only suitd for linux based operating systems not for windows
+Both commands are only suited for linux based operating systems not for windows
 
 # Project considerations
 
