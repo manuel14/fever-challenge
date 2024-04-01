@@ -6,22 +6,22 @@ from flask_swagger_ui import get_swaggerui_blueprint
 
 from parsers.events_parser import parse_event
 
-app = Flask(__name__)
-
 SWAGGER_URL = "/api/docs"
 SWAGGER_FILE_PATH = "/static/swagger.json"
+API_URL = "https://provider.code-challenge.feverup.com/api/events"
+
+app = Flask(__name__)
+# Swagger Config
 swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL, SWAGGER_FILE_PATH, config={"app_name": "Events Api"}
 )
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
+# Cache and App Config
 config = {"DEBUG": True, "CACHE_TYPE": "SimpleCache",
           "CACHE_DEFAULT_TIMEOUT": 300}
-
 app.config.from_mapping(config)
 cache = Cache(app)
-
-API_URL = "https://provider.code-challenge.feverup.com/api/events"
 
 
 def _cache_key(request):
