@@ -3,6 +3,8 @@
 - To run the api server execute: make run
 - To execute the tests: make test
 
+Both commands are only suitd for linux based operating systems not for windows
+
 # Project considerations
 
 - I decided to use Flask framework as i consider it's a good fit for this application, however in order for it to scale properly there are a couple of things we need to take care of which are not introduced here for timing reasons:
