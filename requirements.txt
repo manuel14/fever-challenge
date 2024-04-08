@@ -2,3 +2,7 @@ requests
 flask
 Flask-Caching
 flask-swagger-ui
+fastapi
+fastapi-scheduler
+uvicorn
+httpx
