@@ -6,3 +6,4 @@ fastapi
 fastapi-scheduler
 uvicorn
 httpx
+pytest
