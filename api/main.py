@@ -48,11 +48,6 @@ async def events(starts_at: str = None, ends_at: str = None):
                 "error": "Failed to fetch events"
             }
 
-
-# Schedule the periodic task to update event cache every minute
 scheduler = AsyncIOScheduler()
 scheduler.add_job(update_event_cache, "interval", minutes=1)
 scheduler.start()
-
-#  2021-02-01T21:00:00
-#  2022-07-03T21:00:00
