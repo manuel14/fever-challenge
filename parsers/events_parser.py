@@ -1,6 +1,7 @@
 from datetime import datetime
 import xml.etree.ElementTree as ET
 from typing import List, Dict
+from api.models import Event,  Zone
 
 
 class XMLParser():
@@ -38,23 +39,24 @@ class XMLParser():
         return results
 
     @staticmethod
-    def _convert_event_to_json(base_event, event) -> Dict:
-        event_json = {
-            "title": base_event.get("title"),
-            "start_date": event.get("event_start_date"),
-            "end_date": event.get("event_end_date"),
-            "event_id": event.get("event_id"),
-            "sell_from": event.get("sell_from"),
-            "sell_to": event.get("sell_to"),
-            "sold_out": event.get("sold_out"),
-            "zones": []
-        }
+    def _convert_event_to_json(base_event, event) -> Event:
+        zones = []
         for zone in event.findall("zone"):
-            event_json["zones"].append({
-                "id": zone.get("zone_id"),
-                "capacity": zone.get("capacity"),
-                "price": zone.get("price"),
-                "name": zone.get("name"),
-                "numbered": zone.get("numbered")
-            })
-        return event_json
+            zones.append(Zone(
+                id=zone.get("zone_id"),
+                capacity=zone.get("capacity"),
+                price=zone.get("price"),
+                name=zone.get("name"),
+                numbered=zone.get("numbered")
+            ))
+
+        return Event(
+            title=base_event.get("title"),
+            start_date=event.get("event_start_date"),
+            end_date=event.get("event_end_date"),
+            event_id=event.get("event_id"),
+            sell_from=event.get("sell_from"),
+            sell_to=event.get("sell_to"),
+            sold_out=event.get("sold_out"),
+            zones=zones
+        )
