@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 
 class Parser:
 
-    def _is_xml(self, input_string):
+    def _is_xml(self, input_string: str) -> bool:
         try:
             # Try parsing the string as an XML document
             ET.fromstring(input_string)

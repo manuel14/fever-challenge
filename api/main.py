@@ -12,7 +12,6 @@ event_cache = {}
 
 
 def update_event_cache():
-    print("update going on")
     try:
         response = requests.get(API_URL, timeout=30)
         response.raise_for_status()
@@ -30,7 +29,6 @@ def update_event_cache():
 @app.get("/events")
 async def events(starts_at: str = None, ends_at: str = None):
     if event_cache:
-        print("using cache")
         return event_cache
     else:
         try:
@@ -39,8 +37,7 @@ async def events(starts_at: str = None, ends_at: str = None):
             parser = Parser()
             parsed_events = parser.parse(response.content, starts_at, ends_at)
             return parsed_events
-        except requests.exceptions.RequestException as e:
-            print(str(e))
+        except requests.exceptions.RequestException:
             return {
                 "data": {
                     "events": []
